@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import StrMatch from './StrMatch';
 import './style.css';
 
 const url =
@@ -42,25 +43,6 @@ export default function App() {
     };
   }, [searchParam]);
 
-  const strMatch = (word, index) => {
-    let wordIndex = word.toLowerCase().indexOf(searchParam.toLowerCase());
-    let first = word.slice(0, wordIndex);
-    let last = word.slice(wordIndex + searchParam.length, word.length);
-    return (
-      <p key={index}>
-        {
-          <span>
-            {first}
-            <span style={{ backgroundColor: '#44c3c3', color: '#fff' }}>
-              {searchParam.toLowerCase()}
-            </span>
-            {last}
-          </span>
-        }
-      </p>
-    );
-  };
-
   return (
     <div className="app">
       <div>
@@ -77,7 +59,13 @@ export default function App() {
             {searchParam.length >= 3 && (
               <div>
                 {words.length > 0 ? (
-                  words.map((word, index) => strMatch(word, index))
+                  words.map((word, index) => (
+                    <StrMatch
+                      word={word}
+                      index={index}
+                      searchParam={searchParam}
+                    />
+                  ))
                 ) : (
                   <p>No data</p>
                 )}
