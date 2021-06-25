@@ -22,7 +22,9 @@ export default function App() {
   }, []);
 
   const searchWord = () => {
-    let res = data.filter(wrd => wrd.toLowerCase().includes(searchParam));
+    let res = data.filter(wrd =>
+      wrd.toLowerCase().includes(searchParam.toLowerCase())
+    );
     setWords(res);
     setLoading(false);
   };
@@ -41,7 +43,7 @@ export default function App() {
   }, [searchParam]);
 
   const strMatch = (word, index) => {
-    let wordIndex = word.toLowerCase().indexOf(searchParam);
+    let wordIndex = word.toLowerCase().indexOf(searchParam.toLowerCase());
     let first = word.slice(0, wordIndex);
     let last = word.slice(wordIndex + searchParam.length, word.length);
     return (
@@ -50,7 +52,7 @@ export default function App() {
           <span>
             {first}
             <span style={{ backgroundColor: '#44c3c3', color: '#fff' }}>
-              {searchParam}
+              {searchParam.toLowerCase()}
             </span>
             {last}
           </span>
@@ -66,7 +68,7 @@ export default function App() {
         <input
           type="text"
           placeholder="Search the name"
-          onChange={e => setSearchParam(e.target.value.toLowerCase())}
+          onChange={e => setSearchParam(e.target.value)}
         />
         {loading ? (
           <h4>Loading...</h4>
