@@ -40,10 +40,6 @@ export default function App() {
     };
   }, [searchParam]);
 
-  const handleChange = e => {
-    setSearchParam(e.target.value.toLowerCase());
-  };
-
   const strMatch = (word, index) => {
     let wordIndex = word.toLowerCase().indexOf(searchParam);
     let first = word.slice(0, wordIndex);
@@ -67,7 +63,11 @@ export default function App() {
     <div className="app">
       <div>
         <h1>Word Search</h1>
-        <input type="text" onChange={handleChange} />
+        <input
+          type="text"
+          placeholder="Search the name"
+          onChange={e => setSearchParam(e.target.value.toLowerCase())}
+        />
         {loading ? (
           <h4>Loading...</h4>
         ) : (
@@ -87,4 +87,3 @@ export default function App() {
     </div>
   );
 }
-
